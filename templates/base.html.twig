@@ -11,7 +11,28 @@
             {% block importmap %}{{ importmap('app') }}{% endblock %}
         {% endblock %}
     </head>
-    <body>
-        {% block body %}{% endblock %}
+    
+
+<body class="font-sans bg-gray-50 text-gray-900">
+        
+
+
+
+<nav class="bg-gray-800 text-white p-4 flex items-center space-x-8">
+    <a href="#">
+        <img src="{{ asset('images/logo.jpg') }}" alt="Logo" class="h-8">
+    </a>
+    <ul class="flex space-x-6">
+        <li><a href="#" class="hover:underline">Home</a></li>
+        <li><a href="{{ path('app_article_index') }}" class="hover:underline">Artikel</a></li>
+        <li><a href="#" class="hover:underline">Contact</a></li>
+    </ul>
+</nav>
+
+<main class="p-4">
+    {% block body %}{% endblock %}
+</main>
+
+
     </body>
 </html>
