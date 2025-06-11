@@ -24,7 +24,12 @@
                 <td class="p-2 border">{{ article.id }}</td>
                 <td class="p-2 border">{{ article.title }}</td>
                 <td class="p-2 border">{{ article.content }}</td>
-                <td class="p-2 border">{{ article.image }}</td>
+                {# <td class="p-2 border">{{ article.image }}</td> #}
+                <td class="p-2 border">
+                {% if article.image %}
+                    <img src="{{ asset('images/article/' ~ article.image) }}" alt="{{ article.title }}" class="w-16 h-16 object-cover mb-4 rounded">
+                {% endif %}
+                </td>
                 <td class="p-2 border">{{ article.createdAt ? article.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td class="p-2 border">{{ article.updatedAt ? article.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td class="p-2 border space-x-2">

@@ -8,8 +8,12 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Event\PrePersistEventArgs;
 use Doctrine\ORM\Event\PreUpdateEventArgs;
 
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+
 #[ORM\Entity(repositoryClass: ArticleRepository::class)]
 #[ORM\HasLifecycleCallbacks]
+#[Vich\Uploadable]
 class Article
 {
     #[ORM\Id]
@@ -25,6 +29,10 @@ class Article
 
     #[ORM\Column(length: 255)]
     private ?string $image = null;
+
+    
+    #[Vich\UploadableField(mapping: 'article_images', fileNameProperty: 'image')]
+    private ?File $imageFile = null;
 
     #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
@@ -66,11 +74,25 @@ class Article
         return $this->image;
     }
 
-    public function setImage(string $image): static
+    public function setImage(?string $image): static
     {
         $this->image = $image;
 
         return $this;
+    }
+
+    public function setImageFile(?File $imageFile = null): void
+    {
+        $this->imageFile = $imageFile;
+
+        if ($imageFile !== null) {
+            $this->updatedAt = new \DateTimeImmutable();
+        }
+    }
+
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
     }
 
     public function getCreatedAt(): ?\DateTimeImmutable
