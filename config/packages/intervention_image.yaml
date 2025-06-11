@@ -1,0 +1,5 @@
+intervention_image:
+    driver: Intervention\Image\Drivers\Gd\Driver
+    options:
+        autoOrientation: false
+        strip: true

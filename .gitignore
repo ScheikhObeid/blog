@@ -18,3 +18,7 @@
 /assets/
 /var/cache/
 # /public/images/
+
+# After Vich
+/public/images/article/*
+!public/images/article/.gitkeep
